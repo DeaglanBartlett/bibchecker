@@ -66,10 +66,12 @@ arr = [bibentry(entry) for entry in all_entries]
 names = np.array([a.name for a in arr], dtype=str)
 arxiv = np.array([a.arxiv for a in arr], dtype=str)
 doi = np.array([a.doi for a in arr], dtype=str)
+pages = np.array([a.page for a in arr], dtype=str)
 
 arrays = [names, arxiv, doi]
 labels = ['names', 'arxiv', 'doi']
 
+# Find repeats
 for a in range(len(arrays)):
     arr = arrays[a]
     print('\nRepeats by %s'%labels[a])
@@ -82,3 +84,10 @@ for a in range(len(arrays)):
         else:
             x = names[names == unique[i]]
             print(x)
+
+# Show entries which only have arXiv numbers or no journal
+m = [i for i, d in enumerate(doi) if ('arXiv' in d) or (d == 'None' and 'arXiv' in pages[i])]
+print(f'\narXiv only or no journal (total = {len(m)}):')
+for i in m:
+    print(names[i], arxiv[i])
+
