@@ -33,17 +33,12 @@ class bibentry:
                             self.doi = y
                         else:
                             try:
-                                z = float(y)  # only entries which are numbers
-                            except:
+                                y = float(y)  # only entries which are numbers
+                            except Exception:
                                 y = None
-                            if s == 'eprint':
-                                self.arxiv = y
-                            elif s == 'volume':
-                                self.volume = y
-                            elif s == 'number':
-                                self.number = y
-                            elif s == 'pages':
-                                self.page = y
+                            mapping = {'eprint': 'arxiv', 'volume': 'volume', 'number': 'number', 'pages': 'page'}
+                            if s in mapping:
+                                setattr(self, mapping[s], y)
                                 
 fname = 'references.bib'
 all_entries = []
