@@ -33,7 +33,7 @@ class bibentry:
                             self.doi = y
                         else:
                             try:
-                                y = float(y)  # only entries which are numbers
+                                float(y)  # only entries which are numbers
                             except Exception:
                                 y = None
                             mapping = {'eprint': 'arxiv', 'volume': 'volume', 'number': 'number', 'pages': 'page'}
